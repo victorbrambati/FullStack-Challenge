@@ -33,7 +33,7 @@ export default async (
 
     const { db } = await connect();
 
-    const participationTotal = db.collection('partner').aggregate([
+    const totalParticipation = db.collection('partner').aggregate([
       {
         $group: {
           _id: '12345',
@@ -44,14 +44,14 @@ export default async (
       },
     ]);
 
-    const ar = await participationTotal.toArray();
-    const ar2 = ar[0];
+    const arrTotalParticipation = await totalParticipation.toArray();
+    const zeroArrParticipation = arrTotalParticipation[0];
 
-    if (ar2 !== undefined) {
-      if (ar2.total + participation > 100) {
+    if (zeroArrParticipation !== undefined) {
+      if (zeroArrParticipation.total + participation > 100) {
         res
           .status(400)
-          .json({ error: 'participation total is greater than 100' });
+          .json({ error: 'total participation is greater than 100' });
         return;
       }
     }
